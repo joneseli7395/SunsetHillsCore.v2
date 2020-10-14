@@ -1,0 +1,61 @@
+﻿
+@{
+    ViewData["Title"] = "Code";
+}
+
+<div class="row">
+    <div class="col">
+        <h1>The Code</h1>
+    </div>
+</div>
+<br />
+<div class="row">
+    <div class="col">
+        <h4>The following code is displayed using PrismJS</h4>
+    </div>
+</div>
+<hr />
+<br />
+<div class="row">
+    <div class="col">
+        <pre>
+<code class="language-js line-numbers">[HttpPost]
+    public IActionResult Solve(string input1, string input2, string input3, string input4, string input5)
+    {
+        var sunsetHillsModel = new SunsetHills();
+        sunsetHillsModel.Height1 = Convert.ToInt32(input1);
+        sunsetHillsModel.Height2 = Convert.ToInt32(input2);
+        sunsetHillsModel.Height3 = Convert.ToInt32(input3);
+        sunsetHillsModel.Height4 = Convert.ToInt32(input4);
+        sunsetHillsModel.Height5 = Convert.ToInt32(input5);
+
+        int[] inArray = new int[] {sunsetHillsModel.Height1, sunsetHillsModel.Height2, sunsetHillsModel.Height3, sunsetHillsModel.Height4, sunsetHillsModel.Height5};
+        List<int> newArray = new List<int>();
+        int count = 1;
+        int currentMax = inArray[0];
+        newArray.Add(currentMax);
+
+        for (int i = 0; i < inArray.Length; i++)
+        {
+            if (inArray[i] > currentMax)
+            {
+                count++;
+                newArray.Add(inArray[i]);
+                currentMax = inArray[i];
+            }
+
+        }
+
+        sunsetHillsModel.Output = ($"{count} buildings can see the sun with heights of [{string.Join(", ", newArray)}]");
+        return RedirectToAction("Result", sunsetHillsModel);
+    }
+
+    public IActionResult Result(SunsetHills model)
+    {
+        return View(model);
+    }
+
+</code>
+</pre>
+    </div>
+</div>
